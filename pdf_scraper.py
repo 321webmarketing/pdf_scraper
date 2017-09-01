@@ -17,9 +17,8 @@ links = soup.find_all('a')
 pdf_links = list()
 for link in links:
     if 'pdf' in link.get('href'):
-        print("yes")
         pdf_name = link.text
-        pdf_link = base + link.get('href')
+        pdf_url = base + link.get('href')
         pdf_links.append({"name": pdf_name, "url": pdf_url})
 
 #download all pdf links
@@ -31,6 +30,8 @@ def download_pdf(pdf_name,pdf_url):
         f.write(response)
     #print("Completed")
 
+print(pdf_links)
+
 for pdf in pdf_links:
     download_pdf(pdf["name"], pdf["url"])
-    print(pdf_name,"downloaded to",download_to_dir)
+    print(pdf["name"],"downloaded to",download_to_dir)
